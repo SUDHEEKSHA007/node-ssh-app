@@ -28,4 +28,4 @@ jobs:
         run: docker build -t node-ssh-app .
 
       - name: Run Docker Container
-        run: docker run -d -p 3000:3000 node-ssh-app
+run: docker run -d node-ssh-app
