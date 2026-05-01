@@ -1,4 +1,4 @@
-name: Node CI/CD Pipeline
+name: Node CI + Docker
 
 on:
   push:
@@ -21,30 +21,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run App
+      - name: Run App (Basic Test)
         run: node app.js &
-name: Node CI
 
-on:
-  push:
-    branches:
-      - main
+      - name: Build Docker Image
+        run: docker build -t node-ssh-app .
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run App
-        run: node app.js &
+      - name: Run Docker Container
+        run: docker run -d -p 3000:3000 node-ssh-app
