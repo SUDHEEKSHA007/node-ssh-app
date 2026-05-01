@@ -29,3 +29,5 @@ jobs:
 
       - name: Run Docker Container
 run: docker run -d node-ssh-app
+      - name: Trigger Render Deploy
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
